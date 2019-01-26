@@ -8,4 +8,4 @@ This app will detect faces in images.
 - Clarifai API
 - Tachyons
 - Tilt.js
--
+- Particles.js
