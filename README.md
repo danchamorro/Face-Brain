@@ -7,3 +7,5 @@ This app will detect faces in images.
 - React
 - Clarifai API
 - Tachyons
+- Tilt.js
+-
