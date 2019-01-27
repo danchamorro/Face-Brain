@@ -70,9 +70,9 @@ class App extends Component {
     return (
       <div className="App">
         <Particles params={particlesOptions} className="particles" />
-        <Navigation />
+        {/* <Navigation /> */}
         <Logo />
-        <Rank />
+        {/* <Rank /> */}
         <ImageLinkForm
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
