@@ -1,11 +1,13 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
 
-export default class Signin extends Component {
-  state = {
-    signInEmail: "",
-    signInPassword: ""
-  };
+class Signin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      signInEmail: "",
+      signInPassword: ""
+    };
+  }
 
   onEmailChange = event => {
     this.setState({ signInEmail: event.target.value });
@@ -16,18 +18,20 @@ export default class Signin extends Component {
   };
 
   onSubmitSignIn = () => {
-    axios
-      .post("http://localhost:5000/signin", {
+    fetch("http://localhost:5000/signin", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         email: this.state.signInEmail,
         password: this.state.signInPassword
       })
-      .then(res => {
-        if (res.data === "success") {
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user.id) {
+          this.props.loadUser(user);
           this.props.onRouteChange("home");
         }
-      })
-      .catch(err => {
-        console.log(err);
       });
   };
 
@@ -86,3 +90,5 @@ export default class Signin extends Component {
     );
   }
 }
+
+export default Signin;

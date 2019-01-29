@@ -1,12 +1,14 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
 
-export default class Register extends Component {
-  state = {
-    email: "",
-    password: "",
-    name: ""
-  };
+class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      name: ""
+    };
+  }
 
   onNameChange = event => {
     this.setState({ name: event.target.value });
@@ -21,20 +23,21 @@ export default class Register extends Component {
   };
 
   onSubmitSignIn = () => {
-    axios
-      .post("http://localhost:5000/register", {
+    fetch("http://localhost:5000/register", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         email: this.state.email,
         password: this.state.password,
         name: this.state.name
       })
-      .then(res => {
-        if (res.data) {
-          this.props.loadUser(res.data);
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user) {
+          this.props.loadUser(user);
           this.props.onRouteChange("home");
         }
-      })
-      .catch(err => {
-        console.log(err);
       });
   };
 
@@ -96,3 +99,5 @@ export default class Register extends Component {
     );
   }
 }
+
+export default Register;
