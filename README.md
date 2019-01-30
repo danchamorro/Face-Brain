@@ -11,3 +11,6 @@ https://face-brain.netlify.com/
 - Tachyons
 - Tilt.js
 - Particles.js
+- Bcrypt
+- Node
+- PostgreSQL
